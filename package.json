@@ -16,7 +16,7 @@
     "validator": "^9.3.0"
   },
   "scripts": {
-    "postinstall": "cd front-end && npm run build && cd ..",
+    "postinstall": "cd front-end && npm install & npm run build && cd ..",
     "start": "node index.js"
   },
   "engines": {
