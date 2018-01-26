@@ -34,6 +34,10 @@ app.use('/', express.static(path.join(__dirname, '/front-end/build/')));
 var mountPath = process.env.PARSE_MOUNT || '/parse';
 app.use(mountPath, api);
 
+app.use(function(req, res){
+	res.sendFile(path.join(__dirname, '/front-end/build/index.html'));
+});
+
 // There will be a test page available on the /test path of your server url
 // Remove this before launching your app
 //app.get('/test', function(req, res) {
