@@ -12,9 +12,11 @@
     "express": "4.11.2",
     "kerberos": "0.0.23",
     "parse": "1.8.5",
-    "parse-server": "2.7.2"
+    "parse-server": "2.7.2",
+    "validator": "^9.3.0"
   },
   "scripts": {
+    "postinstall": "cd front-end && npm run build && cd ..",
     "start": "node index.js"
   },
   "engines": {

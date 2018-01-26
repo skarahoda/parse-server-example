@@ -1,0 +1,24 @@
+.clear-from-top {
+    margin-top: 30px;
+}
+
+.clear-from-top-extra {
+    margin-top: 70px;
+}
+
+.clear-from-left {
+    margin-left: 15px;
+}
+
+.clear-from-right {
+    margin-right: 15px;
+}
+
+.boxed-out {
+    border: 1px solid #d8dee2;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    padding: 15px 20px !important;
+    background-color: #FFFFFF;
+}
