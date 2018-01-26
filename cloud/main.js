@@ -1,4 +1,4 @@
-import validator from 'validator';
+var validator = require('validator');
 
 Parse.Cloud.define('hello', function(req, res) {
   res.success('Hi');
@@ -6,7 +6,7 @@ Parse.Cloud.define('hello', function(req, res) {
 
 Parse.Cloud.beforeSave(Parse.User, function(req, res){
 	// check if new signup or update
-	let user = req.object;
+	var user = req.object;
 	if(req.master){
 		res.success();
 	}
