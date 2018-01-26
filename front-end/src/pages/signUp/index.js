@@ -11,7 +11,7 @@ import {
 	ControlLabel,
 	Button,
 	FormControl,
-	Alert, PageHeader
+	Alert
 } from 'react-bootstrap';
 
 import validator from 'validator';
@@ -58,8 +58,7 @@ class SignUp extends Component {
 	}
 
 	isValid(){
-		return true;
-		//return this.isValidEmailValidate() && this.isValidUserName() && this.isValidPasswordValidate();
+		return this.isValidEmailValidate() && this.isValidUserName() && this.isValidPasswordValidate();
 	}
 
 	isValidUserName(){
