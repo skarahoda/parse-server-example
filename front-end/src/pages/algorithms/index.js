@@ -6,7 +6,7 @@ import {
 	Grid,
 	Row,
 	Col,
-	Button, PageHeader
+	Well
 } from 'react-bootstrap';
 
 import {NavBar} from '../../components';
@@ -24,7 +24,8 @@ class Home extends Component {
 		this.doLogout = this.doLogout.bind(this);
 
 		this.state = {
-			isLoggedIn: null
+			isLoggedIn: null,
+			algorithms: []
 		}
 	}
 
@@ -44,6 +45,15 @@ class Home extends Component {
 		this.setState({
 			isLoggedIn: Parse.User.current() !== null
 		});
+
+		var algorithmQuery = new Parse.Query('Algorithm');
+		algorithmQuery.find()
+			.then((algorithms)=>{
+				this.setState({algorithms});
+			})
+			.catch(((err)=>{
+				alert(err.message);
+			}))
 	}
 
 	render(){
@@ -59,6 +69,18 @@ class Home extends Component {
 				<div></div>
 			);
 		}else{
+
+			let algorithmCells = this.state.algorithms.map(function(algo){
+				return (
+					<Row>
+						<Col xs={12} sm={12} md={12} lg={12}>
+							<Well bsSize="large">{algo.get("name")}</Well>
+						</Col>
+					</Row>
+
+				);
+			});
+
 			return (
 				<div>
 					<NavBar onClick={this.doLogout}/>
@@ -68,6 +90,7 @@ class Home extends Component {
 								<h1>Available Algorithms</h1>
 							</Col>
 						</Row>
+						{algorithmCells}
 					</Grid>
 				</div>
 			);
