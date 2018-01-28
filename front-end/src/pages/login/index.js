@@ -11,7 +11,7 @@ import {
 	ControlLabel,
 	Button,
 	FormControl,
-	Alert, PageHeader
+	Alert
 } from 'react-bootstrap';
 
 

@@ -2,12 +2,11 @@ import React, {Component} from 'react';
 import {
 	BrowserRouter as Router,
 	Route,
-	Link,
 	Switch,
 	Redirect
 } from 'react-router-dom'
 import Parse from "parse";
-import {Jobs, Login, SignUp, Algorithms} from './pages';
+import {Jobs, Login, SignUp, Algorithms, AlgorithmDetail} from './pages';
 
 import './App.css';
 
@@ -15,11 +14,6 @@ Parse.serverURL = "https://wirest.herokuapp.com/api";
 Parse.initialize("wirest");
 
 class App extends Component {
-	constructor(props){
-		super(props);
-
-	}
-
 	render(){
 		return (
 			<Router>
@@ -29,6 +23,7 @@ class App extends Component {
 						<Route exact path="/login" component={Login}/>
 						<Route exact path="/sign-up" component={SignUp}/>
 						<Route exact path="/algorithms" component={Algorithms}/>
+						<Route path="/algorithms/:nameUrlEncoded" component={AlgorithmDetail}/>
 						<Route component={Redirection}/>
 					</Switch>
 				</div>

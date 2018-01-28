@@ -2,25 +2,12 @@ var async = require('async');
 var util = require('./util');
 var schema = new Parse.Schema('Job');
 
-console.log(schema);
-
 schema.get()
 	.catch(function(){
 		return schema.save();
 	})
 	.then(function(currentSchema){
-		schema._class_permissions = {
-			"get": {
-				"*": true
-			},
-			"find": {
-				"*": true
-			},
-			"create": {},
-			"update": {},
-			"delete": {},
-			"addField": {}
-		};
+		console.log(currentSchema);
 		return currentSchema;
 	})
 	.then(async.apply(util.addPointer, schema, 'user', '_User'))

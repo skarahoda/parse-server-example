@@ -3,16 +3,12 @@ import 'bootstrap/dist/css/bootstrap-theme.css';
 
 import './index.css';
 
-import {MenuItem, Nav, Navbar, NavDropdown, NavItem} from 'react-bootstrap';
+import {Nav, Navbar, NavItem} from 'react-bootstrap';
 
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom'
 
 class NavBar extends Component {
-	constructor(props){
-		super(props);
-	}
-
 	render(){
 		return (
 			<Navbar inverse collapseOnSelect fluid staticTop>
