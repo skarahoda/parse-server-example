@@ -37,7 +37,7 @@ Parse.Cloud.beforeSave(Parse.User, function(req, res){
 
 Parse.Cloud.define('tryFetchSchema', function(req, res) {
 	if(req.master){
-		var query = new Parse.Query("_SCHEMA");
+		var query = new Parse.Query("_User");
 
 		query.find({useMasterKey: true})
 			.then(function(result){
