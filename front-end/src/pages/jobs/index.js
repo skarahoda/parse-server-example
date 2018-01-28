@@ -9,6 +9,7 @@ import {
 	Button, PageHeader
 } from 'react-bootstrap';
 
+import {NavBar} from '../../components';
 
 import React, {Component} from 'react';
 import {
@@ -59,12 +60,9 @@ class Home extends Component {
 			);
 		} else {
 			return (
-				<div className="clear-from-left clear-from-right">
-					<PageHeader>{"WIREST   "}
-						<small>Home</small>
-					</PageHeader>
-					<Button className="pull-right" bsStyle="danger" onClick={this.doLogout}>Log out</Button>
-					<h2>Home taraflarındayız</h2>
+				<div>
+					<NavBar onClick={this.doLogout}/>
+					<h2>Jobs taraflarındayız</h2>
 				</div>
 			);
 		}

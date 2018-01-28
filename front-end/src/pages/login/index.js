@@ -17,7 +17,8 @@ import {
 
 import React, {Component} from 'react';
 import {
-	Redirect
+	Redirect,
+	Link
 } from 'react-router-dom'
 import Parse from "parse";
 
@@ -103,7 +104,7 @@ class Login extends Component {
 			);
 		}else{
 			return (
-				<div className="clear-from-left clear-from-right clear-from-top-extra">
+				<div>
 					<h1 className="text-center">WIREST</h1>
 					<Grid className="clear-from-top">
 						{warningBox}
@@ -148,8 +149,8 @@ class Login extends Component {
 
 						<Row>
 							<Col className="text-center boxed-out clear-from-top" xs={12} sm={8} md={4} lg={4} smOffset={2} mdOffset={4} lgOffset={4}>
-											If you don't have an account, <a
-								href="/sign-up">kindly sign up here</a>.
+											If you don't have an account, <Link
+								to="/sign-up">kindly sign up here</Link>.
 							</Col>
 						</Row>
 

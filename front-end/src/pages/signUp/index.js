@@ -11,14 +11,15 @@ import {
 	ControlLabel,
 	Button,
 	FormControl,
-	Alert
+	Alert,
 } from 'react-bootstrap';
 
 import validator from 'validator';
 
 import React, {Component} from 'react';
 import {
-	Redirect
+	Redirect,
+	Link
 } from 'react-router-dom'
 import Parse from "parse";
 
@@ -175,7 +176,7 @@ class SignUp extends Component {
 			);
 		}else{
 			return (
-				<div className="clear-from-left clear-from-right clear-from-top-extra">
+				<div>
 					<h1 className="text-center">WIREST</h1>
 					<Grid className="clear-from-top">
 						{warningBox}
@@ -256,8 +257,8 @@ class SignUp extends Component {
 
 						<Row>
 							<Col className="text-center boxed-out clear-from-top" xs={12} sm={8} md={4} lg={4} smOffset={2} mdOffset={4} lgOffset={4}>
-								If you already have an account, <a
-								href="/login">please log in here</a>.
+								If you already have an account, <Link
+								to="/login">please log in here</Link>.
 							</Col>
 						</Row>
 

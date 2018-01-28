@@ -7,9 +7,7 @@ import {
 	Redirect
 } from 'react-router-dom'
 import Parse from "parse";
-import Home from './pages/home';
-import Login from './pages/login';
-import SignUp from './pages/signUp';
+import {Jobs, Login, SignUp, Algorithms} from './pages';
 
 import './App.css';
 
@@ -27,9 +25,10 @@ class App extends Component {
 			<Router>
 				<div>
 					<Switch>
-						<Route exact path="/" component={Home}/>
+						<Route exact path="/" component={Jobs}/>
 						<Route exact path="/login" component={Login}/>
 						<Route exact path="/sign-up" component={SignUp}/>
+						<Route exact path="/algorithms" component={Algorithms}/>
 						<Route component={Redirection}/>
 					</Switch>
 				</div>
