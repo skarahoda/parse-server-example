@@ -36,7 +36,7 @@ Parse.Cloud.beforeSave(Parse.User, function(req, res){
 });
 
 Parse.Cloud.beforeSave("Algorithm", function(req, res){
-	if(req.object.exists("name")){
+	if(req.object.get("name")){
 		req.object.set("nameUrlEncoded", encodeURI(req.object.get("name")));
 	}else{
 		req.object.unset("nameUrlEncoded");
