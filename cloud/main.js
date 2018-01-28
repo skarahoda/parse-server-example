@@ -7,6 +7,14 @@ Parse.Cloud.define('hello', function(req, res) {
 Parse.Cloud.beforeSave(Parse.User, function(req, res){
 	// check if new signup or update
 	var user = req.object;
+
+	var acl = new Parse.ACL(user);
+	acl.setReadAccess(user, true);
+	acl.setWriteAccess(user, true);
+	acl.setPublicReadAccess(false);
+	acl.setPublicWriteAccess(false);
+	user.setACL(acl);
+
 	if(req.master){
 		res.success();
 	}
@@ -24,5 +32,19 @@ Parse.Cloud.beforeSave(Parse.User, function(req, res){
 		} else {
 			res.success();
 		}
+	}
+});
+
+Parse.Cloud.define('tryFetchSchema', function(req, res) {
+	if(req.master){
+		var query = new Parse.Query("_SCHEMA");
+
+		query.find({useMasterKey: true})
+			.then(function(result){
+				res.success(result);
+			})
+			.catch(function(err){
+				res.error(err);
+			})
 	}
 });
