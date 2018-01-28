@@ -44,9 +44,10 @@ Parse.Cloud.beforeSave("Algorithm", function(req, res){
 	res.success();
 });
 
-Parse.Cloud.beforeFind("Algorithm", function(req, res){
+Parse.Cloud.beforeFind("Algorithm", function(req){
+	var initialQuery = req.query;
 	if(req.master){
-		res.success();
+		return initialQuery;
 	}else{
 		var schema = new Parse.Schema("Algorithm");
 		schema.get()
@@ -62,8 +63,8 @@ Parse.Cloud.beforeFind("Algorithm", function(req, res){
 						availableFields.push(elmt);
 					}
 				}
-				req.object.select(availableFields);
-				res.success();
+				initialQuery.select(availableFields);
+				return initialQuery;
 			})
 			.catch(console.error)
 	}
