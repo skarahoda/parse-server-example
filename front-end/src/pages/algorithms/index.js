@@ -73,27 +73,24 @@ class Home extends Component {
 
 			let algorithmCells = this.state.algorithms.map(function(algo){
 				return (
-					<Row key={algo.id}>
-						<Col xs={12} sm={12} md={6} lg={4}>
-							<Link to={"/algorithms/" + algo.get("name")}>
-								<Well className="well-link-hover-class" bsSize="large">
-									{algo.get("name")}
-									<Glyphicon bsSize="large" className="pull-right" glyph="chevron-right"></Glyphicon>
-								</Well>
-							</Link>
-						</Col>
-					</Row>
-
+					<Col key={algo.id} xs={12} sm={12} md={6} lg={4}>
+						<Link to={"/algorithms/" + algo.get("name")}>
+							<Well className="well-link-hover-class" bsSize="large">
+								{algo.get("name")}
+								<Glyphicon bsSize="large" className="pull-right" glyph="chevron-right"></Glyphicon>
+							</Well>
+						</Link>
+					</Col>
 				);
 			});
 
 			return (
 				<div>
 					<NavBar onClick={this.doLogout}/>
-					<Grid>
-						<h3>Available Algorithms</h3>
-					</Grid>
-					{algorithmCells}
+					<h3>Available Algorithms</h3>
+					<Row>
+						{algorithmCells}
+					</Row>
 				</div>
 			);
 		}

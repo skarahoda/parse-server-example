@@ -62,9 +62,7 @@ class Home extends Component {
 			return (
 				<div>
 					<NavBar onClick={this.doLogout}/>
-					<Grid>
 						<h3>Your Jobs</h3>
-					</Grid>
 				</div>
 			);
 		}
