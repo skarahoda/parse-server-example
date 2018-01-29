@@ -14,7 +14,6 @@ schema.get()
 	.then(async.apply(util.addString, schema,'description'))
 	.then(async.apply(util.addString, schema,'bashCommand'))
 	.then(async.apply(util.addString, schema, 'synopsis'))
-	.then(async.apply(util.addString, schema, 'nameUrlEncoded'))
 	.then(async.apply(util.update, schema))
 	.then(async.apply(util.logDone, schema))
 	.catch(console.error);

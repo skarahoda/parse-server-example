@@ -6,7 +6,7 @@ import {
 	Grid,
 	Row,
 	Col,
-	Well
+	Well, ListGroup, ListGroupItem
 } from 'react-bootstrap';
 
 import {NavBar} from '../../components';
@@ -21,10 +21,15 @@ class Home extends Component {
 	constructor(props){
 		super(props);
 
+		console.log("yeni proplar: ", this.props);
+
 		this.doLogout = this.doLogout.bind(this);
 
 		this.state = {
 			isLoggedIn: null,
+			algorithmData: {
+				name: this.props.match.params.name
+			}
 		}
 	}
 
@@ -45,6 +50,23 @@ class Home extends Component {
 			isLoggedIn: Parse.User.current() !== null
 		});
 
+		let algorithmQuery = new Parse.Query('Algorithm');
+		algorithmQuery.equalTo("name", this.state.algorithmData.name);
+		algorithmQuery.first()
+			.then((algo) =>{
+				if(algo){
+					this.setState({
+						algorithmData: {
+							name: algo.get("name"),
+							description: algo.get("description"),
+							synopsis: algo.get("synopsis")
+						}
+					});
+				}
+			})
+			.catch(((err) =>{
+				alert(err.message);
+			}))
 	}
 
 	render(){
@@ -60,16 +82,19 @@ class Home extends Component {
 				<div></div>
 			);
 		}else{
+			let {name, description, synopsis} = this.state.algorithmData;
 			return (
 				<div>
 					<NavBar onClick={this.doLogout}/>
-					<Grid>
-						<Row>
-							<Col xs={12} sm={12} md={12} lg={12}>
-								<h1>{"The Algorithm "+this.props.params.nameUrlEncoded}</h1>
-							</Col>
-						</Row>
-					</Grid>
+					<Row>
+						<Col xs={12} sm={12} md={12} lg={12}>
+							{name && description && synopsis ? <ListGroup>
+								<ListGroupItem><h3>{name}</h3></ListGroupItem>
+								<ListGroupItem>{description}</ListGroupItem>
+								<ListGroupItem>{synopsis}</ListGroupItem>
+							</ListGroup>: null}
+						</Col>
+					</Row>
 				</div>
 			);
 		}

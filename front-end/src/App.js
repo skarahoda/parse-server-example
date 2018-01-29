@@ -23,7 +23,7 @@ class App extends Component {
 						<Route exact path="/login" component={Login}/>
 						<Route exact path="/sign-up" component={SignUp}/>
 						<Route exact path="/algorithms" component={Algorithms}/>
-						<Route path="/algorithms/:nameUrlEncoded" component={AlgorithmDetail}/>
+						<Route path="/algorithms/:name" component={AlgorithmDetail}/>
 						<Route component={Redirection}/>
 					</Switch>
 				</div>

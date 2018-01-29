@@ -6,13 +6,14 @@ import {
 	Grid,
 	Row,
 	Col,
-	Well
+	Well, Glyphicon
 } from 'react-bootstrap';
 
 import {NavBar} from '../../components';
 
 import React, {Component} from 'react';
 import {
+	Link,
 	Redirect
 } from 'react-router-dom'
 import Parse from "parse";
@@ -46,12 +47,12 @@ class Home extends Component {
 			isLoggedIn: Parse.User.current() !== null
 		});
 
-		var algorithmQuery = new Parse.Query('Algorithm');
+		let algorithmQuery = new Parse.Query('Algorithm');
 		algorithmQuery.find()
-			.then((algorithms)=>{
+			.then((algorithms) =>{
 				this.setState({algorithms});
 			})
-			.catch(((err)=>{
+			.catch(((err) =>{
 				alert(err.message);
 			}))
 	}
@@ -72,9 +73,14 @@ class Home extends Component {
 
 			let algorithmCells = this.state.algorithms.map(function(algo){
 				return (
-					<Row>
-						<Col xs={12} sm={12} md={12} lg={12}>
-							<Well bsSize="large">{algo.get("name")}</Well>
+					<Row key={algo.id}>
+						<Col xs={12} sm={12} md={6} lg={4}>
+							<Link to={"/algorithms/"+algo.get("name")}>
+								<Well className="well-link-hover-class" bsSize="large">
+									{algo.get("name")}
+									<Glyphicon bsSize="large" className="pull-right" glyph="chevron-right"></Glyphicon>
+								</Well>
+							</Link>
 						</Col>
 					</Row>
 
@@ -92,6 +98,7 @@ class Home extends Component {
 						</Row>
 						{algorithmCells}
 					</Grid>
+
 				</div>
 			);
 		}

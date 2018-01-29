@@ -37,35 +37,44 @@ Parse.Cloud.beforeSave(Parse.User, function(req, res){
 
 Parse.Cloud.beforeSave("Algorithm", function(req, res){
 	if(req.object.get("name")){
-		req.object.set("nameUrlEncoded", encodeURI(req.object.get("name")));
+		var algoQuery = new Parse.Query("Algorithm");
+		algoQuery.equalTo("name", req.object.get("name"));
+		algoQuery.count({useMasterKey: true})
+			.then(function(count){
+				if(count > 0){
+					res.error("Algorithm names should be unique");
+				}else{
+					res.success();
+				}
+			})
+			.catch(function(err){
+				res.error(err.message);
+			})
 	}else{
-		req.object.unset("nameUrlEncoded");
+		res.error("Name field is compulsory for algorithms");
 	}
-	res.success();
 });
 
 Parse.Cloud.beforeFind("Algorithm", function(req){
-	var initialQuery = req.query;
 	if(req.master){
-		return initialQuery;
+		return req.query;
 	}else{
 		var schema = new Parse.Schema("Algorithm");
-		schema.get()
+		return schema.get()
 			.then(function(currSchema){
 				var availableFields = [];
 				var currSchemaFields = currSchema.fields;
-				var lengthOfCurrSchema = currSchemaFields.length;
-				for(var i = 0; i < lengthOfCurrSchema; i++){
-					var elmt = currSchemaFields[i];
-					//bash command is not available to the other users
-					if(elmt != "objectId" && elmt != "createdAt" && elmt != "updatedAt" && elmt != "ACL" &&
-					   elmt != "bashCommand"){
-						availableFields.push(elmt);
+
+				for (var elmt in currSchemaFields) {
+					if (currSchemaFields.hasOwnProperty(elmt)) {
+						if(elmt != "objectId" && elmt != "createdAt" && elmt != "updatedAt" && elmt != "ACL" &&
+						   elmt != "bashCommand" ){
+							availableFields.push(elmt);
+						}
 					}
 				}
-				initialQuery.select(availableFields);
-				return initialQuery;
+				req.query.select(availableFields);
+				return req.query;
 			})
-			.catch(console.error)
 	}
 });
