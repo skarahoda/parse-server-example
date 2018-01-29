@@ -88,7 +88,7 @@ class Home extends Component {
 				<div>
 					<NavBar onClick={this.doLogout}/>
 					<h3>Available Algorithms</h3>
-					<Row>
+					<Row className="clear-from-top">
 						{algorithmCells}
 					</Row>
 				</div>
