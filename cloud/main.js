@@ -37,19 +37,23 @@ Parse.Cloud.beforeSave(Parse.User, function(req, res){
 
 Parse.Cloud.beforeSave("Algorithm", function(req, res){
 	if(req.object.get("name")){
-		var algoQuery = new Parse.Query("Algorithm");
-		algoQuery.equalTo("name", req.object.get("name"));
-		algoQuery.count({useMasterKey: true})
-			.then(function(count){
-				if(count > 0){
-					res.error("Algorithm names should be unique");
-				}else{
-					res.success();
-				}
-			})
-			.catch(function(err){
-				res.error(err.message);
-			})
+		if(!req.original || (req.original && req.original.get("name") != req.object.get("name"))){
+			var algoQuery = new Parse.Query("Algorithm");
+			algoQuery.equalTo("name", req.object.get("name"));
+			algoQuery.count({useMasterKey: true})
+				.then(function(count){
+					if(count > 0){
+						res.error("Algorithm names should be unique");
+					}else{
+						res.success();
+					}
+				})
+				.catch(function(err){
+					res.error(err.message);
+				})
+		}else{
+			res.success();
+		}
 	}else{
 		res.error("Name field is compulsory for algorithms");
 	}
