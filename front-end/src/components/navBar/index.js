@@ -26,6 +26,9 @@ class NavBar extends Component {
 						<NavItem>
 							<Link to="/algorithms">Algorithms</Link>
 						</NavItem>
+						<NavItem>
+							<Link to="/submit-job">Submit Job</Link>
+						</NavItem>
 					</Nav>
 					<Nav pullRight>
 						<NavItem>

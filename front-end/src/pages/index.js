@@ -6,5 +6,6 @@ import Login from "./login"
 import SignUp from "./signUp"
 import Algorithms from "./algorithms";
 import AlgorithmDetail from "./algorithmDetail";
+import SubmitJob from "./submitJob";
 
-export {Jobs, Login, SignUp, Algorithms, AlgorithmDetail};
+export {Jobs, Login, SignUp, Algorithms, AlgorithmDetail, SubmitJob};

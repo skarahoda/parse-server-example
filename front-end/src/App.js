@@ -6,7 +6,7 @@ import {
 	Redirect
 } from 'react-router-dom'
 import Parse from "parse";
-import {Jobs, Login, SignUp, Algorithms, AlgorithmDetail} from './pages';
+import {Jobs, Login, SignUp, Algorithms, AlgorithmDetail, SubmitJob} from './pages';
 
 import './App.css';
 
@@ -22,6 +22,7 @@ class App extends Component {
 						<Route exact path="/" component={Jobs}/>
 						<Route exact path="/login" component={Login}/>
 						<Route exact path="/sign-up" component={SignUp}/>
+						<Route exact path="/submit-job" component={SubmitJob}/>
 						<Route exact path="/algorithms" component={Algorithms}/>
 						<Route path="/algorithms/:name" component={AlgorithmDetail}/>
 						<Route component={Redirection}/>
