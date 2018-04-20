@@ -8,7 +8,7 @@ Parse.Cloud.beforeSave(Parse.User, function(req, res){
 	// check if new signup or update
 	var user = req.object;
 
-	var acl = new Parse.ACL(user);
+	var acl = new Parse.ACL();
 	acl.setReadAccess(user, true);
 	acl.setWriteAccess(user, true);
 	acl.setPublicReadAccess(false);
