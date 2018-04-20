@@ -45,6 +45,7 @@ class Redirection extends Component {
 		this.setState({
 			mounted: true
 		});
+		document.title = "Wirest";
 	}
 
 	render(){
