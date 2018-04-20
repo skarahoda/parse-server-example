@@ -58,15 +58,12 @@ class Home extends Component {
 	fetchJobs(){
 		return new Parse.Query("Job").descending("createdAt").include("algorithm").find()
 			.then((jobs)=>{
-				console.log(jobs);
 				this.setState({
 					jobs: jobs
 				});
-			})
-			.catch(()=>{})
-			.finally(()=>{
 				setTimeout(this.fetchJobs, 15000);
 			})
+			.catch(()=>{setTimeout(this.fetchJobs, 15000);});
 
 	}
 
