@@ -90,8 +90,8 @@ class Home extends Component {
 					<Row className="clear-from-top">
 						<Col xs={12} sm={12} md={12} lg={12}>
 							<ListGroup>
-								<ListGroupItem className="slightly-bigger-text">{description}</ListGroupItem>
-								<ListGroupItem className="slightly-bigger-text">{synopsis}</ListGroupItem>
+								<ListGroupItem className="slightly-bigger-text"><strong>Synopsis:</strong><br>{synopsis}</ListGroupItem>
+								<ListGroupItem className="slightly-bigger-text"><strong>Description:</strong><br>{description}</ListGroupItem>
 							</ListGroup>
 						</Col>
 					</Row>
