@@ -86,14 +86,13 @@ class Home extends Component {
 			return (
 				<div>
 					<NavBar onClick={this.doLogout}/>
-						<h3>Algorithm Details</h3>
+						<h3>{"Algorithm Details - " + name}</h3>
 					<Row className="clear-from-top">
 						<Col xs={12} sm={12} md={12} lg={12}>
-							{name && description && synopsis ? <ListGroup>
-								<ListGroupItem><h4>{name}</h4></ListGroupItem>
+							<ListGroup>
 								<ListGroupItem className="slightly-bigger-text">{description}</ListGroupItem>
 								<ListGroupItem className="slightly-bigger-text">{synopsis}</ListGroupItem>
-							</ListGroup>: null}
+							</ListGroup>
 						</Col>
 					</Row>
 				</div>
