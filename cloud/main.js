@@ -8,13 +8,6 @@ Parse.Cloud.beforeSave(Parse.User, function(req, res){
 	// check if new signup or update
 	var user = req.object;
 
-	var acl = new Parse.ACL();
-	acl.setReadAccess(user, true);
-	acl.setWriteAccess(user, true);
-	acl.setPublicReadAccess(false);
-	acl.setPublicWriteAccess(false);
-	user.setACL(acl);
-
 	if(req.master){
 		res.success();
 	}
@@ -37,6 +30,26 @@ Parse.Cloud.beforeSave(Parse.User, function(req, res){
 		}
 	}
 });
+
+Parse.Cloud.afterSave(Parse.User, function(req, res){
+
+	if(!req.object.existed()){
+		var user = req.object;
+		
+		// set non-public acl for the user
+		var acl = new Parse.ACL(user);
+		acl.setReadAccess(user, true);
+		acl.setWriteAccess(user, true);
+		acl.setPublicReadAccess(false);
+		acl.setPublicWriteAccess(false);
+		user.setACL(acl);
+	
+		return user.save({}, {useMasterKey: true})
+			.then(function(user){
+				return user;
+			}, console.error);
+	}
+})
 
 Parse.Cloud.beforeSave("Algorithm", function(req, res){
 	if(req.object.get("name")){
