@@ -116,13 +116,25 @@ Parse.Cloud.beforeSave("Job", function(req, res){
 	}
 	else if(req.user){
 		//TO-D0: later may validate parameters...
-		req.object.unset("startTime");
-		req.object.unset("stdOutput");
-		req.object.unset("errorCode");
-		req.object.unset("stdError");
-		req.object.unset("timeout");
-		req.object.set("user", req.user);
-		res.success();
+		
+		req.object.get("algorithm").fetch()
+			.then(function(algo){
+				if( new RegExp(algo.get("regex")).test(req.object.get("parameters")) ){
+					req.object.unset("startTime");
+					req.object.unset("stdOutput");
+					req.object.unset("errorCode");
+					req.object.unset("stdError");
+					req.object.unset("timeout");
+					req.object.set("user", req.user);
+					res.success();
+				}else{
+					res.error("Parameter list does not respect the synopsis.");
+				}
+			})
+			.catch(function(err){
+				res.error(err.message);
+			});
+		
 	}else{
 		res.error("Only authenticated users may submit jobs");
 	}

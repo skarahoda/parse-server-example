@@ -90,6 +90,8 @@ class Home extends Component {
 		let errorCode = job.get("errorCode");
 		if(job.get("startTime") == null){
 			return "Pending";
+		}else if(job.get("endTime") == null){
+			return "Running";
 		}else if(errorCode == null){
 			return "Succeeded";
 		}else if(errorCode == -1){
