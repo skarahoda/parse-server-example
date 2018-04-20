@@ -8,6 +8,10 @@ import {Nav, Navbar, NavItem} from 'react-bootstrap';
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom'
 
+//<NavItem>
+	//<Link to="/profile">Profile</Link>
+//</NavItem>
+
 class NavBar extends Component {
 	render(){
 		return (
@@ -31,9 +35,6 @@ class NavBar extends Component {
 						</NavItem>
 					</Nav>
 					<Nav pullRight>
-						<NavItem>
-							<Link to="/profile">Profile</Link>
-						</NavItem>
 						<NavItem>
 							<a onClick={()=> this.props.onClick()}>Log out</a>
 						</NavItem>
